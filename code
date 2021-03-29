@@ -1,0 +1,148 @@
+#include<AFMotor.h>
+char val;
+
+int mspeed = (255);
+
+AF_DCMotor L2 (1);
+AF_DCMotor L1 (2);
+AF_DCMotor R1 (4);
+AF_DCMotor R2 (3);
+
+void setup() {
+  Serial.begin(9600);
+
+
+}
+void loop() {
+  if(Serial.available()){
+      val=Serial.read();
+     Serial.println(val);
+}
+if (val =='F'){
+  forward();
+}
+else if(val == 'B'){
+  backward();
+}
+else if(val == 'L'){
+  left();
+}
+else if(val == 'R'){
+  right();
+}
+else if(val =='S'){
+  stop(); 
+}
+else if(val == 'G'){
+  fL();   // fr means "front left"
+}
+else if(val == 'I'){  
+  fR();   // fr means "front right"
+}
+else if (val == 'H'){
+  bL();   // fr means "back left"
+}
+else if (val == 'J'){
+  bR();   // fr means "backleft"
+}
+delay(100);
+}
+
+void forward(){
+  L1.run(FORWARD);
+  L1.setSpeed(mspeed);
+  L2.run(FORWARD);
+  L2.setSpeed(mspeed);
+  R1.run(FORWARD);
+  R1.setSpeed(mspeed);
+  R2.run(FORWARD);
+  R2.setSpeed(mspeed);
+}
+
+void backward(){
+  L1.run(BACKWARD);
+  L1.setSpeed(mspeed);
+  L2.run(BACKWARD);
+  L2.setSpeed(mspeed);
+  R1.run(BACKWARD);
+  R1.setSpeed(mspeed);
+  R2.run(BACKWARD);
+  R2.setSpeed(mspeed);
+}
+
+void right() {
+  L1.run(FORWARD);
+  L1.setSpeed(mspeed);
+  L2.run(FORWARD);
+  L2.setSpeed(mspeed);
+  R1.run(BACKWARD);
+  R1.setSpeed(mspeed);
+  R2.run(BACKWARD);
+  R2.setSpeed(mspeed);
+}
+
+void left(){
+  L1.run(BACKWARD);
+  L1.setSpeed(mspeed);
+  L2.run(BACKWARD);
+  L2.setSpeed(mspeed);
+  R1.run(FORWARD);
+  R1.setSpeed(mspeed);
+  R2.run(FORWARD);
+  R2.setSpeed(mspeed);
+}
+
+void stop() {
+  L1.run(RELEASE);
+  L1.setSpeed(0);
+  L2.run(RELEASE);
+  L2.setSpeed(0);
+  R1.run(RELEASE);
+  R1.setSpeed(0);
+  R2.run(RELEASE);
+  R2.setSpeed(0);
+}
+
+void fL (){
+  L1.run(FORWARD);
+  L1.setSpeed(mspeed* 1/4);
+  L2.run(FORWARD);
+  L2.setSpeed(mspeed* 1/4);
+  R1.run(FORWARD);
+  R1.setSpeed(mspeed);
+  R2.run(FORWARD);
+  R2.setSpeed(mspeed);
+}
+
+void fR (){
+  L1.run(FORWARD);
+  L1.setSpeed(mspeed);
+  L2.run(FORWARD);
+  L2.setSpeed(mspeed);
+  R1.run(FORWARD);
+  R1.setSpeed(mspeed* 1/4);
+  R2.run(FORWARD);
+  R2.setSpeed(mspeed* 1/4);
+}
+
+void bL (){
+  L1.run(BACKWARD);
+  L1.setSpeed(mspeed* 1/4);
+  L2.run(BACKWARD);
+  L2.setSpeed(mspeed* 1/4);
+  R1.run(BACKWARD);
+  R1.setSpeed(mspeed);
+  R2.run(BACKWARD);
+  R2.setSpeed(mspeed);
+}
+
+void bR (){
+  L1.run(BACKWARD);
+  L1.setSpeed(mspeed);
+  L2.run(BACKWARD);
+  L2.setSpeed(mspeed);
+  R1.run(BACKWARD);
+  R1.setSpeed(mspeed* 1/4);
+  R2.run(BACKWARD);
+  R2.setSpeed(mspeed* 1/4);
+}
